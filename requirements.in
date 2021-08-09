@@ -1,0 +1,8 @@
+av==8.0.2
+dominate==2.4.0 
+numpy
+torch==1.6.0
+scikit-learn
+scipy
+torchvision==0.7.0
+moviepy
