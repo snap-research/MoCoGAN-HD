@@ -15,12 +15,12 @@ In ICLR 2021, Spotlight.
 
 ### In-domain Video Synthesis
 UCF-101: [image generator](https://drive.google.com/file/d/1USJutDCXOxxEqgOKEzuov7tbHu6iVKdz/view?usp=sharing), [video data](https://www.crcv.ucf.edu/data/UCF101.php) <br>
-FaceForensics: [image generator](/pretrained_models/faceforensics-fid10.9920-snapshot-008765.pt), [video data](https://github.com/ondyari/FaceForensics), [motion generator](https://drive.google.com/drive/folders/1h5Mpcj-ryMqc7m5DVGs40CPoFQKfELP1?usp=sharing) <br>
+FaceForensics: [image generator](https://drive.google.com/file/d/1q8K5VCO3e-WTmC2YrI_z3Nqwf2j4BXXa/view?usp=sharing), [video data](https://github.com/ondyari/FaceForensics), [motion generator](https://drive.google.com/drive/folders/1h5Mpcj-ryMqc7m5DVGs40CPoFQKfELP1?usp=sharing) <br>
 Sky-Timelapse: [image generator](https://drive.google.com/file/d/16qHqShQMAdftVQen9kGBMIUeSh5kQr9d/view?usp=sharing), [video data](https://github.com/weixiong-ur/mdgan)
 ### Cross-domain Video Synthesis
 (FFHQ, VoxCeleb): [FFHQ image generator](https://drive.google.com/file/d/1Mw0HvFimDpdHjV1bX_VQXDxIfVKpmqC_/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) <br>
-(AFHQ, VoxCeleb): [AFHQ image generator](/pretrained_models/afhq-dog-fid7.8476-005655.pt), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/17hnIg_KeuwK5gUSYa1sfrJAnXbOonUbO?usp=sharing) <br>
-(Anime, VoxCeleb): [Anime image generator](/pretrained_models/2020-01-11-skylion-stylegan2-animeportraits-networksnapshot-024664.pt), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/1X5jIUItBtsbkFDcL-gP0bby2JrG0xAZW?usp=sharing) <br>
+(AFHQ, VoxCeleb): [AFHQ image generator](https://drive.google.com/file/d/1dx5z0rp3UGyjLTWpf8P69DJy8JS9IPkE/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/17hnIg_KeuwK5gUSYa1sfrJAnXbOonUbO?usp=sharing) <br>
+(Anime, VoxCeleb): [Anime image generator](https://drive.google.com/file/d/1kd73588GaF1242_WPHQuIwQo2eFJQKwH/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/1X5jIUItBtsbkFDcL-gP0bby2JrG0xAZW?usp=sharing) <br>
 (FFHQ-1024, VoxCeleb): [FFHQ-1024 image generator](https://drive.google.com/file/d/1oljdihTnT53CbHrjAe2BMcbueNjH67Gd/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) <br>
 (LSUN-Church, TLVDB): [LSUN-Church image generator](https://drive.google.com/file/d/1Vk3MEzsAl88cfpztKI2hc6jSTR41tTTw/view?usp=sharing), [TLVDB](http://people.csail.mit.edu/yichangshih/time_lapse/)
 
