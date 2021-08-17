@@ -21,7 +21,7 @@ Sky-Timelapse: [image generator](https://drive.google.com/file/d/16qHqShQMAdftVQ
 (FFHQ, VoxCeleb): [FFHQ image generator](https://drive.google.com/file/d/1Mw0HvFimDpdHjV1bX_VQXDxIfVKpmqC_/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) <br>
 (AFHQ, VoxCeleb): [AFHQ image generator](https://drive.google.com/file/d/1dx5z0rp3UGyjLTWpf8P69DJy8JS9IPkE/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/17hnIg_KeuwK5gUSYa1sfrJAnXbOonUbO?usp=sharing) <br>
 (Anime, VoxCeleb): [Anime image generator](https://drive.google.com/file/d/1kd73588GaF1242_WPHQuIwQo2eFJQKwH/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/1X5jIUItBtsbkFDcL-gP0bby2JrG0xAZW?usp=sharing) <br>
-(FFHQ-1024, VoxCeleb): [FFHQ-1024 image generator](https://drive.google.com/file/d/1oljdihTnT53CbHrjAe2BMcbueNjH67Gd/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) <br>
+(FFHQ-1024, VoxCeleb): [FFHQ-1024 image generator](https://drive.google.com/file/d/1oljdihTnT53CbHrjAe2BMcbueNjH67Gd/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html), [motion generator](https://drive.google.com/drive/folders/13gDzYnOXJb5t7bkDlO1MmVEFmFG9xiQt?usp=sharing) <br>
 (LSUN-Church, TLVDB): [LSUN-Church image generator](https://drive.google.com/file/d/1Vk3MEzsAl88cfpztKI2hc6jSTR41tTTw/view?usp=sharing), [TLVDB](http://people.csail.mit.edu/yichangshih/time_lapse/)
 
 Calculated pca stats are saved [here](https://drive.google.com/drive/folders/1zfowC7njgeWeb97eWMVE0VrfUaUHYrK-?usp=sharing).
