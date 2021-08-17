@@ -14,7 +14,7 @@ In ICLR 2021, Spotlight.
 ## Pre-trained Image Generator & Video Datasets
 
 ### In-domain Video Synthesis
-UCF-101: [image generator](https://drive.google.com/file/d/1USJutDCXOxxEqgOKEzuov7tbHu6iVKdz/view?usp=sharing), [video data](https://www.crcv.ucf.edu/data/UCF101.php) <br>
+UCF-101: [image generator](https://drive.google.com/file/d/1USJutDCXOxxEqgOKEzuov7tbHu6iVKdz/view?usp=sharing), [video data](https://www.crcv.ucf.edu/data/UCF101.php), [motion generator](https://drive.google.com/drive/u/2/folders/1rWFgh_Qzw_P33kRr6bIVcNm-KHQotlsC) <br>
 FaceForensics: [image generator](https://drive.google.com/file/d/1q8K5VCO3e-WTmC2YrI_z3Nqwf2j4BXXa/view?usp=sharing), [video data](https://github.com/ondyari/FaceForensics), [motion generator](https://drive.google.com/drive/folders/1h5Mpcj-ryMqc7m5DVGs40CPoFQKfELP1?usp=sharing) <br>
 Sky-Timelapse: [image generator](https://drive.google.com/file/d/16qHqShQMAdftVQen9kGBMIUeSh5kQr9d/view?usp=sharing), [video data](https://github.com/weixiong-ur/mdgan)
 ### Cross-domain Video Synthesis
@@ -24,7 +24,7 @@ Sky-Timelapse: [image generator](https://drive.google.com/file/d/16qHqShQMAdftVQ
 (FFHQ-1024, VoxCeleb): [FFHQ-1024 image generator](https://drive.google.com/file/d/1oljdihTnT53CbHrjAe2BMcbueNjH67Gd/view?usp=sharing), [VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/vox1.html) <br>
 (LSUN-Church, TLVDB): [LSUN-Church image generator](https://drive.google.com/file/d/1Vk3MEzsAl88cfpztKI2hc6jSTR41tTTw/view?usp=sharing), [TLVDB](http://people.csail.mit.edu/yichangshih/time_lapse/)
 
-Calculated pca stats are save [here](https://drive.google.com/drive/folders/1zfowC7njgeWeb97eWMVE0VrfUaUHYrK-?usp=sharing).
+Calculated pca stats are saved [here](https://drive.google.com/drive/folders/1zfowC7njgeWeb97eWMVE0VrfUaUHYrK-?usp=sharing).
 
 ## Training
 Organise the video dataset as follows:
