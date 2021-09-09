@@ -158,15 +158,15 @@ python -W ignore evaluate.py  \
 #### (FFHQ-1024, VoxCeleb)
 Collect the PCA components from a pre-trained image generator.
 ```
-sh script/ffhq_1024-vox/run_get_stats_pca.sh
+sh script/ffhq-vox/run_get_stats_pca_1024.sh
 ```
 Train the model
 ```
-sh script/ffhq_1024-vox/run_train.sh
+sh script/ffhq-vox/run_train_1024.sh
 ```
 Inference
 ```
-sh script/ffhq_1024-vox/run_evaluate.sh
+sh script/ffhq-vox/run_evaluate_1024.sh
 ```
 #### (AFHQ, VoxCeleb)
 Collect the PCA components from a pre-trained image generator.
