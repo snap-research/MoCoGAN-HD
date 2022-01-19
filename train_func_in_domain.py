@@ -153,13 +153,16 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
     kernel_size = int(opt.style_gan_size / opt.video_frame_size)
     x_fake = F.avg_pool3d(x_fake, (1, kernel_size, kernel_size))
 
+    # D_loss_3d : motion generator learning
+    # video sequence를 작은 3d 패치로 나누어 각각 분류
+    # 실제 비디오의 첫 프레임을 patch로 나누어 cat
     x_in = torch.cat((x[:, 0].unsqueeze(1).repeat(1, opt.n_frames_G - 1, 1, 1,
                                                   1), x[:, 1:]),
                      dim=2)
     x_fake_in = torch.cat((x_fake[:, 0].unsqueeze(1).repeat(
         1, opt.n_frames_G - 1, 1, 1, 1), x_fake[:, 1:]),
                           dim=2)
-
+    
     D_fake_3d = modelD_3d(flip_video(
         torch.transpose(x_fake_in, 1, 2).detach()))
     D_real_3d = modelD_3d(flip_video(torch.transpose(x_in, 1, 2)))
@@ -170,6 +173,7 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
 
     D_loss_3d = (D_loss_real_3d + D_loss_fake_3d) * 0.5
 
+    # gradient penalty
     loss_GP_3d = losses.compute_gradient_penalty_T(
         torch.transpose(x_in, 1, 2), torch.transpose(x_fake_in, 1, 2),
         modelD_3d, opt)
@@ -179,6 +183,7 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
     D_loss_3d.backward(retain_graph=True)
     modelD_3d.module.optim.step()
 
+    # D_loss : 생성된 비디오의 일부 - 실제 비디오의 일부 ->  image discriminator
     frame_id = random.randint(1, opt.n_frames_G - 1)
     D_real = modelD_img(torch.cat((x[:, 0], x[:, frame_id]), dim=1).detach())
     D_fake = modelD_img(
@@ -192,6 +197,8 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
     D_loss.backward()
     modelD_img.module.optim.step()
 
+    # MoCo 처럼 메모리뱅크 유지하여 오래된 negative pair는 삭제하고 
+    # 최근 negative pair 를 update 
     if opt.cross_domain:
         with torch.no_grad():
             modelD_img.module._momentum_update_dis()
@@ -203,6 +210,10 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
 def G_step(opt, modelG, modelD_img, modelD_3d, x, z):
     z.data.normal_()
 
+    # z : initial latent code 
+    # x_fake : generated video from Generator 
+    # rand_in : epsilon(noise vector)
+    # rand_out : hidden state
     x_fake, rand_in, rand_rec = modelG([z], opt.n_frames_G, use_noise=True)
 
     x_fake = x_fake.view(opt.batchSize, opt.n_frames_G, 3, opt.style_gan_size,
@@ -210,19 +221,24 @@ def G_step(opt, modelG, modelD_img, modelD_3d, x, z):
     kernel_size = int(opt.style_gan_size / opt.video_frame_size)
     x_fake = F.avg_pool3d(x_fake, (1, kernel_size, kernel_size))
 
+    # motion diversity - mutual information between  hidden vector and noise vector 
     l_mutual = -torch.mean(F.cosine_similarity(rand_rec, rand_in.detach()))
 
+    # G_loss_2d : 생성된 비디오의 일부 - 실제 비디오의 일부 ->  image discriminator 
     frame_id = random.randint(1, opt.n_frames_G - 1)
     D_fake = modelD_img(torch.cat((x_fake[:, 0], x_fake[:, frame_id]), dim=1))
-    D_real = modelD_img(torch.cat((x[:, 0], x[:, frame_id]), dim=1).detach())
+    D_real = modelD_img(torch.cat((x[:, 0], x[:, frame_id]), dim=1).detach()) # real sample
 
     criterionGAN = losses.Relativistic_Average_LSGAN()
     G_loss_2d = (criterionGAN(D_fake, D_real, True) +
                  criterionGAN(D_real, D_fake, False)) * 0.5
 
+    # G_loss_3d : motion generator learning 
+    # video sequence를 작은 3d 패치로 나누어 각각 분류
+    # 실제 비디오의 첫 프레임을 patch로 나누어 cat
     x_in = torch.cat((x[:, 0].unsqueeze(1).repeat(1, opt.n_frames_G - 1, 1, 1,
-                                                  1), x[:, 1:]),
-                     dim=2)
+                                                  1), x[:, 1:]), 
+                     dim=2) # first frame -> unsqueeze -> patch로 나뉨
     x_fake_in = torch.cat((x_fake[:, 0].unsqueeze(1).repeat(
         1, opt.n_frames_G - 1, 1, 1, 1), x_fake[:, 1:]),
                           dim=2)

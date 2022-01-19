@@ -188,9 +188,11 @@ def D_step(opt, modelG, modelD_img, modelD_3d, x, z):
     D_fake, logits_fake = modelD_img(aug_fake.detach())
     D_fake2, logits_fake2 = modelD_img(aug_fake2.detach())
 
+    # contrastive loss
     cntr_loss = modelD_img.module.get_cntr_loss_cross_domain(
         logits_real, logits_real2, logits_fake, logits_fake2)
 
+    # l1 regularization  
     D_loss_real, D_loss_fake = losses.loss_hinge_dis(D_fake, D_real)
     D_loss = (D_loss_real + D_loss_fake) / 1. + 2. * cntr_loss
 
@@ -221,6 +223,7 @@ def G_step(opt, modelG, modelD_img, modelD_3d, x, z):
     warped_fake = warp(x_fake[:, fake_id])
     warped_real = warp(x_fake[:, 0])
 
+    # momentum decoder (MoCo)
     with torch.no_grad():
         logits_real = modelD_img(warped_real, ema=True, proj_only=True)
         logits_fake = modelD_img(warped_fake, ema=True, proj_only=True)
@@ -230,11 +233,12 @@ def G_step(opt, modelG, modelD_img, modelD_3d, x, z):
     D_fake, l_fake = modelD_img(warped_fake)
     D_real, l_real = modelD_img(warped_real)
 
+    # Feature matching 
     cos_sim = F.cosine_similarity(l_fake, l_real)
     l_match = -cos_sim.mean()
 
     G_loss_2d = losses.loss_hinge_gen(D_fake)
-
+    
     x_in = x
     x_fake_in = x_fake
 

@@ -48,6 +48,7 @@ class VideoDataset(data.Dataset):
 
     def __init__(self, opt):
         self.opt = opt
+        # dataroot에서 (n_frames_G*time_step 넘어가는) 모든 비디오 load 
         self.data_all = self.load_video_frames(opt.dataroot)
 
     def __getitem__(self, index):
@@ -62,11 +63,14 @@ class VideoDataset(data.Dataset):
         video = self.data_all[index]
         video_len = len(video)
 
+        # 필요한 frame 수
         n_frames_interval = n_frames * self.opt.time_step
+        # 시작 인덱스 : 0~ (총 비디오 길이-1 - 필요한 프레임수) 중 랜덤하게 
         start_idx = random.randint(0, video_len - 1 - n_frames_interval)
         img = Image.open(video[0])
         h, w = img.height, img.width
 
+        # 정사각형으로 crop
         if h > w:
             half = (h - w) // 2
             cropsize = (0, half, w, half + w)  # left, upper, right, lower
@@ -83,11 +87,13 @@ class VideoDataset(data.Dataset):
             if h != w:
                 img = img.crop(cropsize)
 
+            # 안티엘리어싱 : 높은 해상도 -> 낮은 해상도 깨지는거 해결
             img = img.resize(
                 (self.opt.video_frame_size, self.opt.video_frame_size),
                 Image.ANTIALIAS)
             img = np.asarray(img, dtype=np.float32)
             img /= 255.
+            # (h, w, c) -> (c, h, w) -> (frame, c, h, w)
             img_tensor = preprocess(img).unsqueeze(0)
             images.append(img_tensor)
 

@@ -105,7 +105,7 @@ class RNNModule(nn.Module):
 
         hc = torch.cat((hh, cc), dim=1)
         e_rec = self.fc2(self.relu(self.fc1(hc)))
-
+        # output(cell state), epsilon(noise vector), hidden state 
         return out, e, e_rec
 
     def get_initial_state_z(self, batchSize):

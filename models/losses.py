@@ -12,7 +12,7 @@ import torch
 import torch.nn.functional as F
 import torch.nn as nn
 
-
+# hinge loss (SVM loss) = max(0, s_j - s_yi +1) (s_j : 정답이 아닌 클래스 score, s_yi : 정답 클래스 score)
 def loss_hinge_dis(dis_fake, dis_real):
     loss_real = torch.mean(F.relu(1. - dis_real))
     loss_fake = torch.mean(F.relu(1. + dis_fake))
@@ -117,7 +117,7 @@ class Relativistic_Average_LSGAN(GANLoss):
                 pred = input_i[-1]
                 _pred = _input_i[-1]
                 target_tensor = self.get_target_tensor(pred, target_is_real)
-                loss += self.loss(pred - torch.mean(_pred), target_tensor)
+                loss += self.loss(pred - torch.mean(_pred), target_tensor)  # MSE loss
             return loss
         else:
             target_tensor = self.get_target_tensor(input_1[-1], target_is_real)
