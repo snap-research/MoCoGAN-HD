@@ -12,6 +12,7 @@ import os
 import torch
 import torch.multiprocessing as mp
 import torch.distributed as dist
+import wandb
 from torch.utils.tensorboard import SummaryWriter
 
 from options.train_options import TrainOptions
@@ -21,6 +22,7 @@ from models.models import create_model
 
 
 def main():
+
     args = TrainOptions().parse()
 
     # 분산 훈련을 위한 노드의 수가 1보다 크거나 노드 당 n process를 돌리기 위해 멀티프로세서 distributed training 하면 true
@@ -38,6 +40,10 @@ def main():
 
 
 def main_worker(gpu, ngpus_per_node, args):
+    wandb.init(project="MoCoGAN-HD")
+
+    wandb.config.update(args)
+
     # check if cross-domain
     if args.cross_domain:
         import train_func_cross_domain as train_func
@@ -79,6 +85,10 @@ def main_worker(gpu, ngpus_per_node, args):
     # load model
     modelG, modelD_img, modelD_3d = create_model(
         args)  # pre-trained Generator, Image D, Video D
+
+    wandb.watch(modelG)
+    wandb.watch(modelD_img)
+    wandb.watch(modelD_3d)
 
     # dataloader
     data_loader = CreateDataLoader(args)
@@ -136,8 +146,13 @@ def main_worker(gpu, ngpus_per_node, args):
                 (args.multiprocessing_distributed
                  and args.rank % ngpus_per_node == 0)):
                 t = time.time() - iter_start_time
+                total_loss = 0
                 errors = {k: v for k, v in loss_dict.items()}
+                for k, v in loss_dict.items():
+                    total_loss += v
+                errors['total_loss'] += v
                 visualizer.print_current_errors(epoch, step, errors, t)
+                wandb.log(errors)
 
             # save model
             if total_steps % args.save_latest_freq == 0 and (

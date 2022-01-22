@@ -4,3 +4,11 @@
 results/
 .vscode
 __pycache__
+checkpoints/*
+checkpoints/sky_timelapse/*
+data/Sky-Timelapse/*
+*.png
+*.jpg
+pretrained_models/*
+pca_stats/*
+wandb/*

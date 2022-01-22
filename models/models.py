@@ -13,7 +13,6 @@ import torch.nn as nn
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from .rnn import RNNModule
-from models.stylegan2 import model
 
 
 def load_checkpoints(path, gpu):
@@ -44,7 +43,11 @@ def model_to_gpu(model, opt):
 
 def create_model(opt):
     ckpt = load_checkpoints(opt.img_g_weights, opt.gpu)
-
+    # added
+    if opt.style_gan3:
+        from models.stylegan3 import model
+    else:
+        from models.stylegan2 import model
     modelG = model.Generator(size=opt.style_gan_size,
                              style_dim=opt.latent_dimension,
                              n_mlp=opt.n_mlp)

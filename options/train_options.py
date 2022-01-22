@@ -149,5 +149,13 @@ class TrainOptions(BaseOptions):
             'Use multi-processing distributed training to launch N processes per node, which has N GPUs.'
         )
 
+        # added 
+        self.parser.add_argument(
+            '--style_gan3',
+            action='store_true',
+            help=
+            'Use StyleGAN3 Generator instead of StyleGAN2 Generator'
+        )
+
         self.isTrain = True
         self.isPCA = False
