@@ -148,9 +148,6 @@ def main_worker(gpu, ngpus_per_node, args):
                 t = time.time() - iter_start_time
                 total_loss = 0
                 errors = {k: v for k, v in loss_dict.items()}
-                for k, v in loss_dict.items():
-                    total_loss += v
-                errors['total_loss'] += v
                 visualizer.print_current_errors(epoch, step, errors, t)
                 wandb.log(errors)
 

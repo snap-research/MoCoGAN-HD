@@ -42,7 +42,7 @@ def model_to_gpu(model, opt):
 
 
 def create_model(opt):
-    ckpt = load_checkpoints(opt.img_g_weights, opt.gpu)
+    #ckpt = load_checkpoints(opt.img_g_weights, opt.gpu)
     # added
     if opt.style_gan3:
         from models.stylegan3 import model
@@ -51,7 +51,12 @@ def create_model(opt):
     modelG = model.Generator(size=opt.style_gan_size,
                              style_dim=opt.latent_dimension,
                              n_mlp=opt.n_mlp)
-    modelG.load_state_dict(ckpt['g_ema'], strict=False)
+    #modelG.load_state_dict(ckpt['g_ema'], strict=False)
+    # added 
+    device = torch.device('cuda')
+    with(opt.img_g_weights,'rb') as f:
+        modelG = legacy.load_network_pkl(f)['G_ema'].to(device) # type: ignore
+
     modelG.eval()
 
     for p in modelG.parameters():

@@ -579,13 +579,13 @@ class SynthesisNetwork(torch.nn.Module):
 @persistence.persistent_class
 class Generator(torch.nn.Module):
     def __init__(self,
-                 z_dim,                      # Input latent (Z) dimensionality.
+                 z_dim = 512,                      # Input latent (Z) dimensionality.
                  # Conditioning label (C) dimensionality.
-                 c_dim,
+                 c_dim = 0,
                  # Intermediate latent (W) dimensionality.
-                 w_dim,
-                 img_resolution,             # Output resolution.
-                 img_channels,               # Number of output color channels.
+                 w_dim = 512,
+                 img_resolution = 256,             # Output resolution.
+                 img_channels= 3,               # Number of output color channels.
                  modelR=None,
                  mapping_kwargs={},   # Arguments for MappingNetwork.
                  **synthesis_kwargs,         # Arguments for SynthesisNetwork.

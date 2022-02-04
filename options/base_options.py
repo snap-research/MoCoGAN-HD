@@ -79,6 +79,15 @@ class BaseOptions():
                                  type=int,
                                  default=384,
                                  help='number of pca components')
+
+        # added 
+        self.parser.add_argument(
+            '--style_gan3',
+            default=True,
+            help=
+            'Use StyleGAN3 Generator instead of StyleGAN2 Generator'
+        )
+        
         self.initialized = True
 
     def parse(self, save=True):
